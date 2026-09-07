@@ -1,0 +1,170 @@
+.pass {
+  padding: 18px 16px 28px;
+  background: #fff;
+}
+
+.pass__logo {
+  display: block;
+  height: 46px;
+  margin: 0 auto;
+}
+
+.pass__title {
+  margin: 14px 0 12px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--bp-navy);
+}
+
+/* --- фото --- */
+
+.pass__photos {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pass__photos--two .pass__photo {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.pass__photo {
+  margin: 0;
+  text-align: center;
+}
+
+.pass__photo img {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-primary);
+  background: #eef4fa;
+}
+
+.pass__photos--two .pass__photo img {
+  max-width: 100%;
+}
+
+.pass__photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  border: 1px dashed var(--bp-primary);
+  border-radius: var(--bp-radius);
+  background: var(--bp-lighter);
+}
+
+.pass__photo-empty .ant-empty {
+  margin: 0;
+}
+
+.pass__photo-empty .ant-empty-description {
+  font-size: 11px;
+  color: var(--bp-grey);
+}
+
+.pass__photo figcaption {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--bp-grey);
+}
+
+.pass__capture-btn {
+  margin: 12px 0 4px;
+  height: 46px;
+  border-radius: var(--bp-radius);
+  font-size: 16px;
+}
+
+/* --- реквизиты --- */
+
+.pass__fields {
+  width: 100%;
+  margin: 14px 0 10px;
+  border-collapse: collapse;
+}
+
+.pass__fields td {
+  padding: 3px 0;
+  vertical-align: top;
+  font-size: 15px;
+}
+
+.pass__label {
+  width: 110px;
+  color: #1b1b1b;
+}
+
+.pass__value {
+  font-weight: 700;
+}
+
+.pass__center {
+  margin: 6px 0;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.pass__center--accent {
+  color: var(--bp-navy);
+  font-weight: 700;
+}
+
+/* --- материалы --- */
+
+.pass__materials {
+  width: 100%;
+  margin: 12px 0;
+  border-collapse: collapse;
+  border: 1px solid #000;
+  font-size: 13px;
+}
+
+.pass__materials th,
+.pass__materials td {
+  border: 1px solid #000;
+  padding: 4px 6px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.pass__materials th {
+  font-weight: 700;
+}
+
+/* --- QR --- */
+
+.pass__qr {
+  margin-top: 18px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #000;
+  border-radius: var(--bp-radius);
+}
+
+.pass__qr-hint {
+  font-size: 13px;
+  color: var(--bp-grey);
+  text-align: center;
+}
+
+/* antd <Image> оборачивает картинку в div — тянем обёртку на всю ширину */
+.pass__photo .ant-image {
+  width: 100%;
+  max-width: 200px;
+}
+
+.pass__photos--two .pass__photo .ant-image {
+  max-width: 100%;
+}

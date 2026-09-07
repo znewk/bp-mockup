@@ -1,0 +1,29 @@
+.visitor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.visitor__top {
+  align-self: flex-start;
+  padding: 12px 16px;
+}
+
+.visitor__screen {
+  padding-top: 22px;
+}
+
+.visitor__alert {
+  margin: 0 16px;
+  border-radius: var(--bp-radius);
+}
+
+@media (max-width: 700px) {
+  .visitor__top {
+    display: none;
+  }
+  .visitor__screen {
+    padding-top: 0;
+  }
+}

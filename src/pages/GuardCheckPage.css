@@ -1,0 +1,54 @@
+.guard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.guard__top {
+  align-self: flex-start;
+  padding: 12px 16px;
+}
+
+.guard__screen {
+  padding-top: 22px;
+}
+
+.guard__alert {
+  margin: 0 16px;
+  border-radius: var(--bp-radius);
+}
+
+.guard__status {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 0;
+}
+
+.guard__status .ant-tag {
+  border-radius: 20px;
+  padding: 2px 12px;
+  margin: 0;
+}
+
+.guard__actions {
+  display: flex;
+  gap: 10px;
+  padding: 4px 16px 28px;
+}
+
+.guard__actions .ant-btn {
+  flex: 1 1 0;
+  height: 48px;
+  border-radius: var(--bp-radius);
+  font-size: 16px;
+}
+
+@media (max-width: 700px) {
+  .guard__top {
+    display: none;
+  }
+  .guard__screen {
+    padding-top: 0;
+  }
+}

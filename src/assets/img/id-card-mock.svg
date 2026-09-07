@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 265" width="420" height="265" role="img" aria-label="Скан удостоверения личности РК (макет)">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dff3f7"/>
+      <stop offset="45%" stop-color="#bde6ef"/>
+      <stop offset="100%" stop-color="#e8f6f9"/>
+    </linearGradient>
+    <linearGradient id="hdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7fd0e0"/>
+      <stop offset="100%" stop-color="#a9e0ea"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="418" height="263" rx="12" fill="url(#g)" stroke="#8fbcc7"/>
+
+  <!-- шапка -->
+  <rect x="1" y="1" width="418" height="46" rx="12" fill="url(#hdr)"/>
+  <rect x="1" y="34" width="418" height="13" fill="url(#hdr)"/>
+  <circle cx="210" cy="24" r="13" fill="#f2c14b" stroke="#c99b2e"/>
+  <text x="210" y="29" text-anchor="middle" font-family="Arial" font-size="13" fill="#8a6a12">☼</text>
+  <text x="104" y="18" text-anchor="middle" font-family="Arial" font-size="9.5" font-weight="bold" fill="#0b4f5e">ҚАЗАҚСТАН РЕСПУБЛИКАСЫ</text>
+  <text x="104" y="33" text-anchor="middle" font-family="Arial" font-size="9.5" font-weight="bold" fill="#0b4f5e">ЖЕКЕ КУӘЛІК</text>
+  <text x="316" y="18" text-anchor="middle" font-family="Arial" font-size="9.5" font-weight="bold" fill="#0b4f5e">РЕСПУБЛИКА КАЗАХСТАН</text>
+  <text x="316" y="33" text-anchor="middle" font-family="Arial" font-size="9.5" font-weight="bold" fill="#0b4f5e">УДОСТОВЕРЕНИЕ ЛИЧНОСТИ</text>
+
+  <!-- фото -->
+  <rect x="22" y="66" width="96" height="124" rx="4" fill="#c2c2c2" stroke="#9aa7ad"/>
+  <circle cx="70" cy="112" r="21" fill="#ababab"/>
+  <path d="M38 178c0-19 14-32 32-32s32 13 32 32z" fill="#ababab"/>
+
+  <!-- поля -->
+  <g font-family="Arial" font-size="7.5" fill="#4a6a73">
+    <text x="140" y="74">ТЕГІ / ФАМИЛИЯ</text>
+    <text x="140" y="106">АТЫ / ИМЯ</text>
+    <text x="140" y="138">ӘКЕСІНІҢ АТЫ / ОТЧЕСТВО</text>
+    <text x="140" y="170">ТУҒАН КҮНІ / ДАТА РОЖДЕНИЯ</text>
+    <text x="22" y="210">ЖСН / ИИН</text>
+  </g>
+  <g stroke="#9dc4ce" stroke-width="1">
+    <line x1="140" y1="88" x2="330" y2="88"/>
+    <line x1="140" y1="120" x2="330" y2="120"/>
+    <line x1="140" y1="152" x2="330" y2="152"/>
+    <line x1="140" y1="184" x2="270" y2="184"/>
+    <line x1="22" y1="224" x2="200" y2="224"/>
+  </g>
+
+  <!-- защитный элемент -->
+  <rect x="345" y="66" width="52" height="66" rx="3" fill="#b6b6b6" stroke="#9aa7ad"/>
+
+  <!-- MRZ -->
+  <rect x="22" y="234" width="376" height="20" rx="2" fill="#ffffff" opacity="0.55"/>
+  <text x="28" y="248" font-family="Courier New, monospace" font-size="10" fill="#6b7f86">IDKAZ&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</text>
+</svg>
