@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { Button, Empty, Image } from 'antd';
-import { CameraOutlined, RetweetOutlined } from '@ant-design/icons';
+import { Button, Empty } from 'antd';
+import {
+  CameraOutlined,
+  CheckCircleFilled,
+  LockOutlined,
+  RetweetOutlined,
+  SendOutlined,
+} from '@ant-design/icons';
 import type { PassDto } from '../data/mock';
+import PhotoLightbox from './PhotoLightbox';
 import logoKmg from '../assets/img/logo-kmg.png';
 import './PassDocument.css';
 
@@ -18,7 +26,10 @@ interface Props {
   entryDate?: string | null;
   /** Ссылка, зашитая в QR (страница охранника) */
   qrValue?: string;
+  /** Фото уже отправлено — только тогда открывается QR */
+  photoSent?: boolean;
   onCapture?: () => void;
+  onSendPhoto?: () => void;
 }
 
 /**
@@ -32,9 +43,15 @@ export default function PassDocument({
   documentScan,
   entryDate,
   qrValue,
+  photoSent = false,
   onCapture,
+  onSendPhoto,
 }: Props) {
   const isGuard = mode === 'guard';
+  // Просмотр фото охранником — оверлей внутри «телефона», а не во всём окне
+  const [preview, setPreview] = useState<{ src: string; title: string } | null>(null);
+  const openPreview = (src: string, title: string) =>
+    isGuard ? () => setPreview({ src, title }) : undefined;
 
   return (
     <div className="pass">
@@ -46,7 +63,12 @@ export default function PassDocument({
       <div className={`pass__photos ${isGuard ? 'pass__photos--two' : ''}`}>
         <figure className="pass__photo">
           {photo ? (
-            <Image src={photo} alt="Фото посетителя" preview={isGuard} />
+            <img
+              src={photo}
+              alt="Фото посетителя"
+              className={isGuard ? 'pass__photo-img--zoomable' : undefined}
+              onClick={openPreview(photo, 'Фото посетителя')}
+            />
           ) : (
             <div className="pass__photo-empty">
               <Empty
@@ -61,7 +83,12 @@ export default function PassDocument({
         {isGuard && (
           <figure className="pass__photo">
             {documentScan ? (
-              <Image src={documentScan} alt="Скан удостоверения личности" preview={isGuard} />
+              <img
+                src={documentScan}
+                alt="Скан удостоверения личности"
+                className="pass__photo-img--zoomable"
+                onClick={openPreview(documentScan, 'Скан удостоверения')}
+              />
             ) : (
               <div className="pass__photo-empty">
                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Нет скана" />
@@ -72,18 +99,42 @@ export default function PassDocument({
         )}
       </div>
 
-      {/* --- Кнопка съёмки: только на странице посетителя --- */}
-      {!isGuard && onCapture && (
-        <Button
-          block
-          size="large"
-          type={photo ? 'default' : 'primary'}
-          icon={photo ? <RetweetOutlined /> : <CameraOutlined />}
-          className="pass__capture-btn"
-          onClick={onCapture}
-        >
-          {photo ? 'Переснять' : 'Снять на фото'}
-        </Button>
+{/* --- Съёмка и отправка: только на странице посетителя --- */}
+      {!isGuard && (
+        <div className="pass__actions">
+          {onCapture && (
+            <Button
+              block
+              size="large"
+              type={photo && !photoSent ? 'default' : 'primary'}
+              icon={photo ? <RetweetOutlined /> : <CameraOutlined />}
+              className="pass__btn"
+              onClick={onCapture}
+            >
+              {photo ? 'Переснять' : 'Снять на фото'}
+            </Button>
+          )}
+
+          {/* Фото снято, но ещё не ушло — отдельным шагом подтверждаем отправку */}
+          {photo && !photoSent && onSendPhoto && (
+            <Button
+              block
+              size="large"
+              type="primary"
+              icon={<SendOutlined />}
+              className="pass__btn"
+              onClick={onSendPhoto}
+            >
+              Отправить фото
+            </Button>
+          )}
+
+          {photoSent && (
+            <div className="pass__sent">
+              <CheckCircleFilled /> Фото отправлено — QR активен
+            </div>
+          )}
+        </div>
       )}
 
       {/* --- Реквизиты --- */}
@@ -150,11 +201,36 @@ export default function PassDocument({
 
       {/* --- QR: сканирует охранник на посту --- */}
       {!isGuard && (
-        <div className="pass__qr">
-          <QRCodeCanvas value={qrValue ?? String(pass.number)} size={190} level="M" marginSize={2} />
-          <div className="pass__qr-hint">Покажите QR охраннику на посту</div>
+        <div className={`pass__qr ${photoSent ? '' : 'pass__qr--locked'}`}>
+          <div className="pass__qr-code">
+            <QRCodeCanvas
+              value={qrValue ?? String(pass.number)}
+              size={190}
+              level="M"
+              marginSize={2}
+            />
+          </div>
+
+          {!photoSent && (
+            <div className="pass__qr-lock">
+              <LockOutlined />
+              <span>QR откроется после отправки фото</span>
+            </div>
+          )}
+
+          <div className="pass__qr-hint">
+            {photoSent
+              ? 'Покажите QR охраннику на посту'
+              : 'Сначала снимите и отправьте фото лица'}
+          </div>
         </div>
       )}
+
+      <PhotoLightbox
+        src={preview?.src ?? null}
+        title={preview?.title}
+        onClose={() => setPreview(null)}
+      />
     </div>
   );
 }

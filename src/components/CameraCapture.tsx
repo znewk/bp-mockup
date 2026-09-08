@@ -94,7 +94,7 @@ export default function CameraCapture({ open, onClose, onConfirm }: Props) {
       centered
       destroyOnHidden
     >
-      {error && <Alert type="warning" showIcon message={error} className="camera__alert" />}
+      {error && <Alert type="warning" showIcon title={error} className="camera__alert" />}
 
       <div className="camera__stage">
         {shot ? (

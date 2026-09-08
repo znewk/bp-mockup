@@ -76,11 +76,30 @@
   color: var(--bp-grey);
 }
 
-.pass__capture-btn {
+.pass__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 12px 0 4px;
+}
+
+.pass__btn {
   height: 46px;
   border-radius: var(--bp-radius);
   font-size: 16px;
+}
+
+.pass__sent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bp-success);
+  background: rgba(46, 183, 97, 0.1);
+  border-radius: var(--bp-radius);
 }
 
 /* --- реквизиты --- */
@@ -143,6 +162,7 @@
 /* --- QR --- */
 
 .pass__qr {
+  position: relative;
   margin-top: 18px;
   padding: 14px;
   display: flex;
@@ -153,18 +173,51 @@
   border-radius: var(--bp-radius);
 }
 
+.pass__qr--locked {
+  border-color: #c9d4e3;
+  border-style: dashed;
+}
+
+.pass__qr-code {
+  display: flex;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.pass__qr--locked .pass__qr-code {
+  filter: blur(7px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Замок поверх заблокированного QR */
+.pass__qr-lock {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bp-navy);
+}
+
+.pass__qr-lock .anticon {
+  font-size: 28px;
+  color: var(--bp-grey);
+}
+
 .pass__qr-hint {
   font-size: 13px;
   color: var(--bp-grey);
   text-align: center;
 }
 
-/* antd <Image> оборачивает картинку в div — тянем обёртку на всю ширину */
-.pass__photo .ant-image {
-  width: 100%;
-  max-width: 200px;
-}
-
-.pass__photos--two .pass__photo .ant-image {
-  max-width: 100%;
+.pass__photo-img--zoomable {
+  cursor: zoom-in;
 }

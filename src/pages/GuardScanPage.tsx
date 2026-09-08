@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Alert, Button } from 'antd';
 import { ArrowLeftOutlined, QrcodeOutlined } from '@ant-design/icons';
 import PhoneFrame from '../components/PhoneFrame';
-import { MOCK_PASS, formatEntryTime, writeState } from '../data/mock';
+import { MOCK_PASS, formatEntryTime, readState, writeState } from '../data/mock';
 import logoKmg from '../assets/img/logo-kmg.png';
 import './GuardScanPage.css';
 
@@ -16,6 +16,7 @@ export default function GuardScanPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [scanError, setScanError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,7 +46,17 @@ export default function GuardScanPage() {
   }, []);
 
   const handleScan = () => {
+    // Пропуск без фото сверять нечем — на пост такого посетителя не пускаем
+    if (!readState().photo) {
+      setScanError(
+        'В пропуске нет фото посетителя. Попросите его открыть электронный пропуск, ' +
+          'сфотографироваться и нажать «Отправить фото».',
+      );
+      return;
+    }
+
     // Фиксируем время входа — оно появится в пропуске у охранника
+    setScanError(null);
     writeState({ entryDate: formatEntryTime(), decision: null });
     navigate(`/guard/pass/${MOCK_PASS.number}`);
   };
@@ -67,7 +78,17 @@ export default function GuardScanPage() {
             <span>Пост охраны</span>
           </div>
 
-          {error && <Alert type="warning" showIcon message={error} className="scan__alert" />}
+          {error && <Alert type="warning" showIcon title={error} className="scan__alert" />}
+
+          {scanError && (
+            <Alert
+              type="error"
+              showIcon
+              title="Пропуск не прошёл проверку"
+              description={scanError}
+              className="scan__alert"
+            />
+          )}
 
           <div className="scan__viewport">
             <video ref={videoRef} playsInline muted />
@@ -90,7 +111,7 @@ export default function GuardScanPage() {
             className="scan__btn"
             onClick={handleScan}
           >
-            Считать QR-код
+            {scanError ? 'Проверить ещё раз' : 'Считать QR-код'}
           </Button>
         </div>
       </PhoneFrame>

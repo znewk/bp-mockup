@@ -55,7 +55,7 @@ export default function GuardCheckPage() {
                 className="guard__alert"
                 type={state.photo ? 'info' : 'warning'}
                 showIcon
-                message={
+                title={
                   state.photo
                     ? 'Сверьте лицо посетителя'
                     : 'Посетитель не сделал фото'
