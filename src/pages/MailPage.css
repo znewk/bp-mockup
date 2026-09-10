@@ -64,3 +64,47 @@
   color: var(--bp-grey);
   font-size: 14px;
 }
+
+/* --- итоговое письмо: переключатель решения и блок результата --- */
+
+.mail__switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto 14px;
+  padding: 0 4px;
+}
+
+.mail__switch-label {
+  font-size: 13px;
+  color: var(--bp-grey);
+}
+
+.mail__result {
+  margin: 16px 0;
+  border-radius: var(--bp-radius);
+}
+
+.mail__facts {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 14px 16px;
+  background: var(--bp-lighter);
+  border-radius: var(--bp-radius);
+}
+
+.mail__facts > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.mail__facts span {
+  color: var(--bp-grey);
+}

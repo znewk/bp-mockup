@@ -88,3 +88,8 @@
   margin-top: 28px;
   border-radius: var(--bp-radius);
 }
+
+.home__section {
+  margin: 34px 0 4px !important;
+  color: var(--bp-navy) !important;
+}

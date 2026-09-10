@@ -1,0 +1,515 @@
+/* ==========================================================================
+   Каркас рабочего места — перенос containers/default-layout основного
+   проекта (default-layout.component.scss) на React/CSS без изменений
+   размеров, цветов и отступов.
+   ========================================================================== */
+
+.app-layout {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------- сайдбар --------------------------- */
+
+.menu-sidebar {
+  position: fixed;
+  z-index: 10;
+  min-height: 100vh;
+  height: 100%;
+  background: #001529;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.mini-menu-sidebar {
+  flex: 0 0 60px;
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
+}
+
+.big-menu-sidebar {
+  flex: 0 0 270px;
+  width: 270px;
+  max-width: 270px;
+  min-width: 270px;
+}
+
+.sidebar-logo {
+  position: relative;
+  height: 64px;
+  padding-left: 5px;
+  overflow: hidden;
+  line-height: 64px;
+  background: #001529;
+  transition: all 0.3s;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.sidebar-logo-logo {
+  display: inline-block;
+  height: 55px;
+  width: 55px;
+  vertical-align: middle;
+}
+
+.sidebar-logo-name {
+  display: inline-block;
+  height: 55px;
+  width: 180px;
+  vertical-align: middle;
+  margin-top: 10px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.ant-menu-dark {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  height: 90vh;
+  position: relative;
+}
+
+.menu-item {
+  height: auto;
+  line-height: 50px;
+  white-space: nowrap;
+}
+
+.menu-item > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px 0 18px;
+  height: 50px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-item .menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  flex: 0 0 24px;
+  font-size: 24px;
+  color: #f0f6fc;
+  font-style: normal;
+}
+
+.menu-item > a > span {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.mini-menu-sidebar .menu-item > a > span {
+  opacity: 0;
+}
+
+.menu-item:hover > a {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Активный пункт — как .ant-menu-item-selected в основном проекте */
+.menu-item.selected > a {
+  background-color: #f0f6fc;
+  border-top-left-radius: 11px;
+  border-bottom-left-radius: 11px;
+  margin-left: 5px;
+}
+
+.menu-item.selected .menu-icon,
+.menu-item.selected > a > span {
+  color: #000;
+}
+
+.trigger-button {
+  display: grid;
+  position: absolute;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  bottom: 30px;
+}
+
+.trigger-button a {
+  color: #fff;
+  cursor: pointer;
+}
+
+.trigger-button .menu-icon {
+  font-size: 22px;
+  color: #fff;
+}
+
+/* --------------------------- контент --------------------------- */
+
+.content-default {
+  margin-left: 60px;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  position: relative;
+  height: 64px;
+  padding: 0;
+  background: #f0f6fc;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-panel {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  margin-left: 20px;
+  color: black;
+  font-size: 24px;
+}
+
+.right-panel {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.right-panel a {
+  color: black;
+}
+
+.lang-panel {
+  margin-right: 15px;
+  background-color: white;
+  padding: 8px 10px 8px 10px;
+  border-radius: 10px;
+  line-height: 1;
+}
+
+.lang-panel a {
+  color: black !important;
+  font-size: 14px;
+}
+
+.app-header .ant-avatar,
+.app-header .ant-avatar.ant-avatar-icon {
+  margin-right: 7px;
+  background: white;
+  color: #001529;
+}
+
+.userInfo {
+  padding-left: 5px;
+  margin-right: 15px;
+  font-size: 14px;
+}
+
+.app-content {
+  flex: 1 1 auto;
+  background: url('../assets/img/content-background.jpg') no-repeat bottom;
+  background-size: cover;
+}
+
+.inner-content {
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .inner-content {
+    padding-top: 5px;
+  }
+  .showIfBig {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 1001px) {
+  .inner-content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* ---------------------- ссылки-таблетки ------------------------ */
+
+.links {
+  margin-bottom: 5px;
+  padding-top: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .links {
+    text-align: center;
+  }
+}
+
+.link {
+  color: #02aef0;
+  border: 1px solid;
+  text-decoration: none;
+}
+
+.activeLink {
+  background: #02aef0 !important;
+  color: white;
+}
+
+.link,
+.activeLink {
+  border-radius: 10px;
+  min-width: 225px;
+  height: 46px;
+  display: inline-block;
+  text-align: center;
+  font-size: 15px;
+  padding-top: 11px;
+  margin-right: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 8px;
+}
+
+/* ------------- общие элементы экранов основного проекта -------- */
+
+/* Панель поиска и фильтров — views/visitors/visitors.component.scss */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.add-user-button {
+  height: 38px;
+  text-align: center;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  margin-top: 8px;
+  margin-right: 20px;
+  display: inline-block;
+  border-radius: 18px;
+  min-width: 180px;
+  background: #02aef0;
+}
+
+.add-user-button:hover {
+  background: #23bdf7;
+  color: #fff;
+}
+
+.filter {
+  padding: 8px 10px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px 0;
+  margin-left: auto;
+}
+
+.filter .ant-input-affix-wrapper,
+.filter .ant-select,
+.filter .ant-picker {
+  margin-right: 10px;
+  background: white;
+  border-radius: 7px;
+  min-width: 210px;
+  max-height: 38px;
+  height: 38px;
+}
+
+.filter .ant-select#residentStatus,
+.filter .ant-select.narrow {
+  min-width: 130px;
+}
+
+.btn-add {
+  background: #536dfe;
+  border-radius: 3px;
+  color: #ffffff;
+  border: none;
+}
+
+/* Жёлтый баннер с инструкцией */
+.update-banner {
+  display: flex;
+  align-items: flex-start;
+  background: #fffcca;
+  border: 1px solid #f9d43a;
+  border-radius: 4px;
+  margin: 20px 28px 0 28px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000;
+}
+
+.update-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.update-text {
+  text-align: left;
+  margin: 0;
+}
+
+.update-text .update-link {
+  color: #005a9c;
+  text-decoration: underline;
+}
+
+/* Таблица — прозрачная шапка без нижней границы, компактные ячейки */
+.kmg-table {
+  margin-top: 20px;
+}
+
+.kmg-table .ant-table {
+  background: transparent;
+}
+
+.kmg-table .ant-table-thead > tr > th {
+  background: none !important;
+  border-bottom: 0 !important;
+  font-weight: 600;
+}
+
+.kmg-table .ant-table-thead > tr > th,
+.kmg-table .ant-table-tbody > tr > td {
+  padding: 6px 6px !important;
+}
+
+.kmg-table
+  .ant-table-thead
+  > tr
+  > th:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before {
+  display: none !important;
+}
+
+.kmg-table .ant-table-tbody > tr > td {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.kmg-table .ant-table-tbody > tr:hover > td {
+  background: #ffffff;
+}
+
+/* Иконки согласования в таблице */
+.approveButtons a {
+  font-size: 20px;
+  margin-left: 5px;
+  color: #0f658f;
+}
+
+.approve-icon {
+  color: #07ad07;
+  font-size: 20px;
+}
+
+.refuse-icon {
+  color: #cc244c;
+  font-size: 20px;
+  margin-left: 2px;
+}
+
+.additionalButtons {
+  cursor: pointer;
+  color: #000;
+  font-size: 18px;
+}
+
+.buttons {
+  display: grid;
+  gap: 8px;
+}
+
+.buttons a {
+  font-size: 18px;
+  color: black;
+  font-weight: 200;
+}
+
+/* Ячейка ФИО с аватаром */
+.avatar-cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Статусы */
+.pending-status {
+  color: darkgoldenrod;
+}
+
+.valid-status {
+  color: green;
+}
+
+.default-status {
+  color: red;
+}
+
+/* Причина отклонения в таблице */
+.reason-cell {
+  color: #cc244c;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.reason-cell small {
+  display: block;
+  color: #8696b1;
+}
+
+.dash {
+  color: #c3ccdb;
+}
+
+/* Кнопка «Согласованные пропуски» — views/security/security.component.scss */
+.visitButton {
+  border-radius: 7px;
+  width: 225px;
+}
+
+/* Мигающая точка нарушения режима — .blink_me из visitors.component.scss */
+.blink-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: #ff0000;
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Строка демо-посетителя */
+.row--live > td {
+  background: #eaf7fe !important;
+}

@@ -73,6 +73,23 @@ export const MOCK_PASS: PassDto = {
 
 const STORAGE_KEY = 'bp-mockup-state';
 
+/** Тип действия в журнале — EntryTypeEnum основного проекта */
+export type EntryAction = 'Enter' | 'Exit' | 'CardPrint' | 'CardRePrint' | 'Denied';
+
+export interface EntryLogItem {
+  id: string;
+  passNumber: number;
+  visitorFullName: string;
+  action: EntryAction;
+  date: string;
+  /** Пост, на котором зафиксировано событие */
+  post: string;
+  /** Кто зафиксировал */
+  operator: string;
+  /** Заполняется для отказов */
+  reason?: string;
+}
+
 export interface PassState {
   /** Селфи посетителя (base64) */
   photo: string | null;
@@ -80,15 +97,24 @@ export interface PassState {
   documentScan: string | null;
   /** Время входа, проставляется охранником */
   entryDate: string | null;
+  /** Время выхода */
+  exitDate: string | null;
   /** Решение охранника */
   decision: 'allowed' | 'denied' | null;
+  /** Причина отклонения — заполняется охранником при отказе */
+  declineReason: string | null;
+  /** Журнал входов и выходов по этому пропуску */
+  log: EntryLogItem[];
 }
 
 const DEFAULT_STATE: PassState = {
   photo: null,
   documentScan: idCardMock,
   entryDate: null,
+  exitDate: null,
   decision: null,
+  declineReason: null,
+  log: [],
 };
 
 export function readState(): PassState {
@@ -113,6 +139,17 @@ export function writeState(patch: Partial<PassState>): PassState {
 export function resetState(): void {
   localStorage.removeItem(STORAGE_KEY);
   window.dispatchEvent(new StorageEvent('storage', { key: STORAGE_KEY }));
+}
+
+/** Добавить запись в журнал входов/выходов */
+export function addLogEntry(item: Omit<EntryLogItem, 'id' | 'date'> & { date?: string }): PassState {
+  const entry: EntryLogItem = {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    date: item.date ?? formatEntryTime(),
+    ...item,
+  };
+  const state = readState();
+  return writeState({ log: [entry, ...state.log] });
 }
 
 export function formatEntryTime(date = new Date()): string {
