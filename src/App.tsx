@@ -7,6 +7,7 @@ import GuardScanPage from './pages/GuardScanPage';
 import GuardCheckPage from './pages/GuardCheckPage';
 import SecurityDeskPage from './pages/workplace/SecurityDeskPage';
 import SecurityJournalPage from './pages/workplace/SecurityJournalPage';
+import SecurityRegistryPage from './pages/workplace/SecurityRegistryPage';
 import ReceptionDeskPage from './pages/workplace/ReceptionDeskPage';
 import DkbDeskPage from './pages/workplace/DkbDeskPage';
 
@@ -25,6 +26,7 @@ export default function App() {
 
       {/* Рабочие места сотрудников */}
       <Route path="/workplace/security" element={<SecurityDeskPage />} />
+      <Route path="/workplace/security/registry" element={<SecurityRegistryPage />} />
       <Route path="/workplace/security/journal" element={<SecurityJournalPage />} />
       <Route path="/workplace/reception" element={<ReceptionDeskPage />} />
       <Route path="/workplace/dkb" element={<DkbDeskPage />} />

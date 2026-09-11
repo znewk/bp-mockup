@@ -1,6 +1,6 @@
 import { MOCK_PASS } from '../../data/mock';
 import { usePassState } from '../../data/usePassState';
-import { MOCK_VISITS, ROLES, type VisitRow, type VisitStatus } from '../../data/registry';
+import { MOCK_VISITS, type VisitRow, type VisitStatus } from '../../data/registry';
 import type { ModuleLink } from '../../components/WorkplaceLayout';
 
 /**
@@ -14,6 +14,7 @@ export const VISITOR_LINKS: ModuleLink[] = [
 
 export const SECURITY_LINKS: ModuleLink[] = [
   { url: '/workplace/security', name: 'Посетители в здании' },
+  { url: '/workplace/security/registry', name: 'Реестр заявок' },
   { url: '/workplace/security/journal', name: 'Журнал входов и выходов' },
 ];
 
@@ -51,7 +52,7 @@ export function useVisitRows(): VisitRow[] {
           : 'InBuilding'
         : state.photo
           ? 'CardGiven'
-          : 'OnAgreement';
+          : 'NotAgreement';
 
   const live: VisitRow = {
     id: 0,
@@ -66,8 +67,10 @@ export function useVisitRows(): VisitRow[] {
     entryTime: state.decision === 'allowed' ? state.entryDate : null,
     exitTime: state.exitDate,
     status,
-    reasonDecline: state.declineReason,
-    declinedBy: state.declineReason ? `${ROLES.security.user} (охрана)` : null,
+    reasonDecline: null,
+    declinedBy: null,
+    // отказ на посту пишется в отдельную колонку «Причина отклонения охраны»
+    securityDeclineReason: state.declineReason,
     cabinet: MOCK_PASS.cabinet,
     floor: MOCK_PASS.floor,
     photo: state.photo,

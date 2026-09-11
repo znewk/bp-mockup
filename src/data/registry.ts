@@ -52,10 +52,12 @@ export const ROLES: Record<RoleKey, RoleInfo> = {
 /* ---------------------------- статусы ----------------------------- */
 
 export type VisitStatus =
+  | 'NotAgreement'
   | 'OnAgreement'
   | 'OnAgreementDkb'
   | 'Denied'
   | 'DeniedDkb'
+  | 'Canceled'
   | 'CardGiven'
   | 'InBuilding'
   | 'LeftFromBuilding'
@@ -64,15 +66,17 @@ export type VisitStatus =
 
 /** Подписи и цвета статусов. Значения — VisitStatusEnum основного проекта. */
 export const STATUS_INFO: Record<VisitStatus, { label: string; color: string }> = {
+  NotAgreement: { label: 'Не согласован', color: 'gold' },
   OnAgreement: { label: 'На согласовании', color: 'gold' },
   OnAgreementDkb: { label: 'На согласовании ДКБ', color: 'orange' },
   Denied: { label: 'Отказано', color: 'red' },
   DeniedDkb: { label: 'Отказано ДКБ', color: 'red' },
+  Canceled: { label: 'Отменен', color: 'default' },
   CardGiven: { label: 'Выдана карта', color: 'cyan' },
   InBuilding: { label: 'В здании', color: 'green' },
   LeftFromBuilding: { label: 'Вышел из здания', color: 'blue' },
   Expired: { label: 'Просрочено', color: 'default' },
-  NotUsed: { label: 'Не использован', color: 'default' },
+  NotUsed: { label: 'Не использовано', color: 'default' },
 };
 
 /* ------------------------ действия в журнале ---------------------- */
@@ -115,10 +119,12 @@ export interface VisitRow {
   entryTime: string | null;
   exitTime: string | null;
   status: VisitStatus;
-  /** Причина отклонения — поле reasonDecline основного проекта */
+  /** Причина отклонения согласующим — поле reasonDecline основного проекта */
   reasonDecline: string | null;
-  /** Кто отклонил */
+  /** Кто отклонил заявку на согласовании */
   declinedBy: string | null;
+  /** Новое: причина, по которой охрана не пропустила на посту */
+  securityDeclineReason?: string | null;
   cabinet: string;
   floor: number;
   /** Фото посетителя — в карточке охраны и в аватаре таблицы */
@@ -181,8 +187,9 @@ export const MOCK_VISITS: VisitRow[] = [
     entryTime: null,
     exitTime: null,
     status: 'Denied',
-    reasonDecline: 'Лицо не совпадает с фото в пропуске',
-    declinedBy: 'Асылов Асыл Асылович (охрана)',
+    reasonDecline: null,
+    declinedBy: null,
+    securityDeclineReason: 'Лицо не совпадает с фото в пропуске',
     cabinet: '0415',
     floor: 4,
     organization: 'ТОО «Контрагент»',
@@ -202,6 +209,7 @@ export const MOCK_VISITS: VisitRow[] = [
     status: 'DeniedDkb',
     reasonDecline: 'Посетитель находится в чёрном списке',
     declinedBy: 'Даулетов Даулет Даулетович (ДКБ)',
+    securityDeclineReason: null,
     cabinet: '1306',
     floor: 13,
     organization: 'ТОО «Контрагент»',

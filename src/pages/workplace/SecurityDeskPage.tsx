@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { Button, Card, Col, Input, Modal, Row, Select, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { Button, Card, Col, Input, Row, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import WorkplaceLayout from '../../components/WorkplaceLayout';
 import { SECURITY_LINKS, statusClass, useVisitRows } from './shared';
@@ -10,24 +8,17 @@ import {
   formatEntryTime,
   writeState,
 } from '../../data/mock';
-import {
-  POST_NAME,
-  ROLES,
-  STATUS_INFO,
-  type VisitRow,
-  type VisitStatus,
-} from '../../data/registry';
+import { POST_NAME, ROLES, STATUS_INFO, type VisitRow } from '../../data/registry';
 import './SecurityDeskPage.css';
 
 /**
- * Модуль «Охрана» — перенос views/security/security.component.html
- * основного проекта: кнопка «Согласованные пропуски», фильтр из поиска и двух
- * селектов, посетители карточками nz-card по три в ряд (nzSpan=8) с фото слева
- * и реквизитами справа.
+ * Модуль «Охрана», вкладка «Посетители в здании» — перенос
+ * views/security/security.component.html основного проекта: фильтр из поиска
+ * и двух селектов, посетители карточками nz-card по три в ряд (nzSpan=8)
+ * с фото слева и реквизитами справа.
  */
 export default function SecurityDeskPage() {
   const rows = useVisitRows();
-  const [approveOpen, setApproveOpen] = useState(false);
 
   // На экране охраны показываются активные пропуска текущего дня
   const list = rows.filter(
@@ -48,21 +39,6 @@ export default function SecurityDeskPage() {
     void row;
   };
 
-  /** Таблица в модалке «Согласованные пропуски» — app-approve-list */
-  const approveColumns: ColumnsType<VisitRow> = [
-    { title: '№ заявки', dataIndex: 'passNumber', width: 90 },
-    { title: 'ФИО', dataIndex: 'visitorFullName' },
-    { title: 'ИИН', dataIndex: 'iin', width: 130 },
-    { title: 'К кому', dataIndex: 'inviterFullName' },
-    { title: 'Срок действия', key: 'v', render: (_, r) => `${r.validFrom} - ${r.validTo}` },
-    {
-      title: 'Статус',
-      dataIndex: 'status',
-      width: 150,
-      render: (s: VisitStatus) => <span className={statusClass(s)}>{STATUS_INFO[s].label}</span>,
-    },
-  ];
-
   return (
     <WorkplaceLayout
       role="security"
@@ -70,10 +46,6 @@ export default function SecurityDeskPage() {
       activeMenu="security"
       links={SECURITY_LINKS}
     >
-      <Button className="visitButton" onClick={() => setApproveOpen(true)}>
-        Согласованные пропуски
-      </Button>
-
       <div className="filter sec-filter">
         <Input placeholder="Поиск" suffix={<SearchOutlined />} />
         <Select
@@ -171,23 +143,6 @@ export default function SecurityDeskPage() {
       </Row>
 
       {list.length === 0 && <div className="sec-empty">Активных пропусков нет</div>}
-
-      <Modal
-        open={approveOpen}
-        title="Согласованные пропуски"
-        width={1500}
-        footer={null}
-        onCancel={() => setApproveOpen(false)}
-      >
-        <Table
-          className="kmg-table"
-          rowKey="id"
-          size="small"
-          columns={approveColumns}
-          dataSource={rows}
-          pagination={false}
-        />
-      </Modal>
     </WorkplaceLayout>
   );
 }
