@@ -9,6 +9,10 @@ import type { ModuleLink } from '../../components/WorkplaceLayout';
  */
 export const VISITOR_LINKS: ModuleLink[] = [
   { url: '/workplace/reception', name: 'Список посетителей' },
+];
+
+/** Кабинет ДКБ живёт отдельно — из списка посетителей на него не переходят */
+export const DKB_LINKS: ModuleLink[] = [
   { url: '/workplace/dkb', name: 'Согласование ДКБ' },
 ];
 

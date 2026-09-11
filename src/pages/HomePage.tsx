@@ -9,6 +9,7 @@ import {
   ReloadOutlined,
   SafetyCertificateOutlined,
   SolutionOutlined,
+  TeamOutlined,
 } from '@ant-design/icons';
 import { MOCK_PASS, resetState } from '../data/mock';
 import logoLogin from '../assets/img/logo-login.svg';
@@ -23,6 +24,13 @@ const SCENARIOS = [
     step: 'Шаг 1',
     title: 'Письмо посетителю',
     text: 'Посетитель получает на почту электронный пропуск со ссылкой.',
+  },
+  {
+    to: '/mail/initiator',
+    icon: <TeamOutlined />,
+    step: 'Шаг 1а',
+    title: 'Письмо инициатору',
+    text: 'Автор заявки получает подтверждение, что пропуск оформлен на посетителя.',
   },
   {
     to: `/pass/${MOCK_PASS.number}`,

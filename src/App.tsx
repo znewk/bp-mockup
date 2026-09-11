@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MailPage from './pages/MailPage';
+import MailInitiatorPage from './pages/MailInitiatorPage';
 import MailResultPage from './pages/MailResultPage';
 import VisitorPassPage from './pages/VisitorPassPage';
 import GuardScanPage from './pages/GuardScanPage';
@@ -21,6 +22,8 @@ export default function App() {
       <Route path="/pass/:number" element={<VisitorPassPage />} />
       <Route path="/guard" element={<GuardScanPage />} />
       <Route path="/guard/pass/:number" element={<GuardCheckPage />} />
+      {/* Письмо инициатору заявки: пропуск оформлен на посетителя */}
+      <Route path="/mail/initiator" element={<MailInitiatorPage />} />
       {/* Итоговое письмо: пропущен или отказано с причиной */}
       <Route path="/mail/result" element={<MailResultPage />} />
 

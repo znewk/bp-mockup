@@ -8,7 +8,7 @@ import {
   SearchOutlined,
 } from '@ant-design/icons';
 import WorkplaceLayout from '../../components/WorkplaceLayout';
-import { VISITOR_LINKS, statusClass, useVisitRows } from './shared';
+import { DKB_LINKS, statusClass, useVisitRows } from './shared';
 import {
   DECLINE_REASONS,
   ROLES,
@@ -157,7 +157,7 @@ export default function DkbDeskPage() {
       role="dkb"
       moduleName="Посетители"
       activeMenu="visitor"
-      links={VISITOR_LINKS}
+      links={DKB_LINKS}
     >
       <div className="search-box">
         <div className="filter">
