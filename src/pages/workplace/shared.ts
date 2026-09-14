@@ -28,12 +28,16 @@ export const SECURITY_LINKS: ModuleLink[] = [
  */
 export function statusClass(status: VisitStatus): string {
   switch (status) {
-    case 'InBuilding':
+    case 'OnTerminal':
     case 'CardGiven':
+    case 'InBuilding':
     case 'LeftFromBuilding':
       return 'valid-status';
     case 'Denied':
     case 'DeniedDkb':
+    case 'DeniedDkbResponsible':
+    case 'DeniedDkbAdviser':
+    case 'WrongEnterExit':
       return 'default-status';
     default:
       return 'pending-status';

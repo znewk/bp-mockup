@@ -51,30 +51,54 @@ export const ROLES: Record<RoleKey, RoleInfo> = {
 
 /* ---------------------------- статусы ----------------------------- */
 
+/** Все значения VisitStatusEnum основного проекта (enums/visit-status.enum.ts) */
 export type VisitStatus =
   | 'NotAgreement'
   | 'OnAgreement'
   | 'OnAgreementDkb'
+  | 'OnAgreementDkbResponsible'
+  | 'OnAgreementDkbAdviser'
+  | 'OnAdvancedAgreementDkb'
   | 'Denied'
   | 'DeniedDkb'
+  | 'DeniedDkbResponsible'
+  | 'DeniedDkbAdviser'
   | 'Canceled'
+  | 'OnTerminal'
   | 'CardGiven'
   | 'InBuilding'
   | 'LeftFromBuilding'
+  | 'WrongEnterExit'
   | 'Expired'
   | 'NotUsed';
 
-/** Подписи и цвета статусов. Значения — VisitStatusEnum основного проекта. */
+/**
+ * Подписи статусов.
+ *
+ * ВАЖНО: в боевой системе тексты статусов лежат не в коде, а приходят с бэка
+ * (api/Dictionaries/Localizations/GetLocalization, ключ VisitStatusEnum.<Status>).
+ * В locale-файлах репозитория ключа VisitStatusEnum нет, поэтому подписи здесь
+ * взяты из комментариев к enums/visit-status.enum.ts, а «Отменен» и
+ * «Не использовано» — со скриншота боевого реестра. При переносе в прод
+ * тексты нужно сверить со справочником локализаций.
+ */
 export const STATUS_INFO: Record<VisitStatus, { label: string; color: string }> = {
   NotAgreement: { label: 'Не согласован', color: 'gold' },
   OnAgreement: { label: 'На согласовании', color: 'gold' },
   OnAgreementDkb: { label: 'На согласовании ДКБ', color: 'orange' },
+  OnAgreementDkbResponsible: { label: 'На согласовании у ответственного ДКБ', color: 'orange' },
+  OnAgreementDkbAdviser: { label: 'На согласовании у советника ДКБ', color: 'orange' },
+  OnAdvancedAgreementDkb: { label: 'На дополнительном согласовании ДКБ', color: 'orange' },
   Denied: { label: 'Отказано', color: 'red' },
   DeniedDkb: { label: 'Отказано ДКБ', color: 'red' },
+  DeniedDkbResponsible: { label: 'Отказано ответственным ДКБ', color: 'red' },
+  DeniedDkbAdviser: { label: 'Отказано советником ДКБ', color: 'red' },
   Canceled: { label: 'Отменен', color: 'default' },
+  OnTerminal: { label: 'На терминале', color: 'cyan' },
   CardGiven: { label: 'Выдана карта', color: 'cyan' },
   InBuilding: { label: 'В здании', color: 'green' },
   LeftFromBuilding: { label: 'Вышел из здания', color: 'blue' },
+  WrongEnterExit: { label: 'Некорректный вход/выход', color: 'red' },
   Expired: { label: 'Просрочено', color: 'default' },
   NotUsed: { label: 'Не использовано', color: 'default' },
 };

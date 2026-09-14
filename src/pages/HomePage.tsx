@@ -21,42 +21,42 @@ const SCENARIOS = [
   {
     to: '/mail',
     icon: <MailOutlined />,
-    step: 'Шаг 1',
+    num: '1',
     title: 'Письмо посетителю',
     text: 'Посетитель получает на почту электронный пропуск со ссылкой.',
   },
   {
     to: '/mail/initiator',
     icon: <TeamOutlined />,
-    step: 'Шаг 1а',
+    num: '1а',
     title: 'Письмо инициатору',
     text: 'Автор заявки получает подтверждение, что пропуск оформлен на посетителя.',
   },
   {
     to: `/pass/${MOCK_PASS.number}`,
     icon: <CameraOutlined />,
-    step: 'Шаг 2',
+    num: '2',
     title: 'Электронный пропуск',
     text: 'Открывает ссылку на телефоне, фотографирует лицо и отправляет фото — только после этого открывается QR.',
   },
   {
     to: '/guard',
     icon: <QrcodeOutlined />,
-    step: 'Шаг 3',
+    num: '3',
     title: 'Сканирование QR',
     text: 'На посту охраны охранник сканирует QR. Без отправленного фото проход не пройдёт.',
   },
   {
     to: `/guard/pass/${MOCK_PASS.number}`,
     icon: <SafetyCertificateOutlined />,
-    step: 'Шаг 4',
+    num: '4',
     title: 'Сверка охранником',
     text: 'Сверяет лицо с фото и со сканом удостоверения, пропускает или отказывает с причиной.',
   },
   {
     to: '/mail/result',
     icon: <SolutionOutlined />,
-    step: 'Шаг 5',
+    num: '5',
     title: 'Итоговое письмо',
     text: 'Посетителю уходит результат: вход подтверждён или отказ с указанием причины.',
   },
@@ -111,7 +111,10 @@ export default function HomePage() {
           className="home__steps"
           responsive
           current={-1}
-          items={SCENARIOS.map((s) => ({ title: s.title }))}
+          items={SCENARIOS.map((s) => ({
+            title: s.title,
+            icon: <span className="home__step-num">{s.num}</span>,
+          }))}
         />
 
         <div className="home__cards">
@@ -119,7 +122,7 @@ export default function HomePage() {
             <Link key={s.to} to={s.to} className="home__card-link">
               <Card hoverable className="home__card" variant="borderless">
                 <div className="home__card-icon">{s.icon}</div>
-                <div className="home__card-step">{s.step}</div>
+                <div className="home__card-step">Шаг {s.num}</div>
                 <div className="home__card-title">{s.title}</div>
                 <div className="home__card-text">{s.text}</div>
               </Card>

@@ -93,3 +93,18 @@
   margin: 34px 0 4px !important;
   color: var(--bp-navy) !important;
 }
+
+/* Кружок степпера — номер берётся из того же поля, что и подпись карточки */
+.home__step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #d4dced;
+  color: var(--bp-grey);
+  font-size: 14px;
+  line-height: 1;
+}
